@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BroadcastRecipient</string>
+    <string name="default_text">No broadcasts received yet.</string>
+    <string name="permission_label_start_main_activity">send broadcasts that will start BroadcastRecipient\'s main activity</string>
+    <string name="permission_description_start_main_activity">Allows the app to send broadcasts that will start BroadcastRecipient\'s main activity. Malicious apps may try to interfere with BroadcastRecipient\'s proper operation.</string>
+
+    <!-- This string is part of Conduit's API. -->
+    <string name="permission_group_conduit_broadcasts" translatable="false">jackameister.android.conduit.permission-group.BROADCASTS</string>
+</resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="jackameister.android.broadcastrecipient">
+
+    <!--
+      - If you are not worried about user security, you don't need to make a permission, apply it
+      - to your broadcast receiver, and contact the Conduit developer about it. But if you don't
+      - use permissions, any third-party app can send broadcasts to your receiver, and your users
+      - have no way to prevent it from doing so. Whether this is dangerous depends on what your
+      - receiver does and who your users are.
+      -
+      - If you are making a permission, you define the "name" attribute here and tell it to the
+      - Conduit developer.
+      -->
+    <permission
+        android:name="jackameister.android.broadcastrecipient.START_MAIN_ACTIVITY"
+        android:label="@string/permission_label_start_main_activity"
+        android:description="@string/permission_description_start_main_activity"
+        android:protectionLevel="normal"
+        android:permissionGroup="@string/permission_group_conduit_broadcasts"
+        />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="jackameister.android.broadcastrecipient.main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="jackameister.android.broadcastrecipient.main.ConduitBroadcastReceiver"
+            android:exported="true"
+            android:permission="jackameister.android.broadcastrecipient.START_MAIN_ACTIVITY" >
+            <!--
+              - Conduit currently only sends broadcasts with MIME types of "conduit/#", where '#'
+              - is an integer in [0,9]. But this may change in the future.
+              -->
+            <intent-filter>
+                <action android:name="jackameister.android.conduit.broadcast" />
+                <data android:mimeType="conduit/*" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
